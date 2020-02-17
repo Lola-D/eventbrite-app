@@ -13,17 +13,17 @@
  *= require_tree .
  *= require_self
  */
-body {
+body, .jumbotron {
   background-color: #b7c9d8;
 }
 .navbar {
   background-color: #b7d8d7;
 }
 
-.nav-item a .navbar-brand {
-  color: #fff;
-}
-
 .card {
   background-color: #eaeff4;
+}
+
+.jumbotron {
+  color: #fff;
 }
