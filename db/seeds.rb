@@ -10,7 +10,7 @@ Attendance.reset_pk_sequence
 end
 
 10.times do
-  Event.create(start_date: Faker::Time.forward(days: 60, format: :long), duration: 120, title: Faker::Marketing.buzzwords, description: Faker::Lorem.paragraph(sentence_count: 4), price: Faker::Number.within(range: 1..100), location: Faker::Address.city, admin: User.all.sample)
+  Event.create(start_date: Faker::Time.forward(days: 60, format: :long), duration: 120, title: Faker::Marketing.buzzwords, description: Faker::Lorem.paragraph(sentence_count: 4), price: Faker::Number.within(range: 1..100), location: Faker::Address.street_address, admin: User.all.sample)
 end
 
 5.times do

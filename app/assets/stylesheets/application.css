@@ -20,7 +20,7 @@ body, .jumbotron {
   background-color: #b7d8d7;
 }
 
-.card {
+.card, .card-header {
   background-color: #eaeff4;
 }
 
