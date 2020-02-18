@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :authenticate_user
+
   def show
     @events = Event.find_by(params['admin_id'])
     @user = User.find(params['id'])

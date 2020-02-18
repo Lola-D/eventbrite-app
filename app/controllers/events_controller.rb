@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  
+
   def index
     @events = Event.all
   end
@@ -13,19 +13,14 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.create!(start_date: params['start_date'], 
-                          duration: params['duration'], 
-                          title: params['title'], 
-                          description: params['description'], 
-                          price: params['price'], 
-                          location: params['location'], 
-                          admin_id: current_user.id)
+    @event = Event.create(event_params)
+    @event.admin = current_user
     if @event.save
       redirect_to "/"
       flash[:success] = "L'événement a bien été créé !"
     else
       render :new
-      flash[:danger] = "L'énévement' n'a pas été créé !"
+      flash[:danger] = "L'énévement n'a pas été créé !"
     end
   end
 
@@ -35,16 +30,12 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params['id'])
-    if @event.update(start_date: params['start_date'], 
-                     duration: params[:duration], title: params['title'], 
-                     description: params['description'], price: params['price'], 
-                     location: params[:location], 
-                     admin_id: current_user.id)
+    if @event.update(event_params)
       redirect_to event_path(@event.id)
-      flash[:success] = "Le event a bien été édité !"
+      flash[:success] = "L'événement a bien été édité !"
     else
       redirect_to edit_event_path(@event.id)
-      flash[:danger] = "Le event n'a pas été édité !"
+      flash[:danger] = "L'événement n'a pas été édité !"
     end
   end
 
@@ -52,11 +43,18 @@ class EventsController < ApplicationController
     @event = Event.find(params['id'])
     if @event.destroy
       redirect_to "/"
-      flash[:success] = "Le event a bien été supprimé !"
+      flash[:success] = "L'événement a bien été supprimé !"
     else
       render event_path(@event.id)
-      flash[:danger] = "Le event n'a pas été supprimé !"
+      flash[:danger] = "L'événement n'a pas été supprimé !"
     end
+  end
+
+
+  private
+
+  def event_params
+    params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
   end
 
 end
