@@ -5,7 +5,7 @@
   </div>
 
 <div class="card ml-5 mr-5 p-5 mt-5">
-  <%= form_for(@user, as: :user, url: user_path(@user), method: :patch, html: { class: "edit_user", id: "edit_user.id" }) do |f|  %>
+  <%= form_for current_user, url: user_path(current_user), method: :patch, html: { class: "edit_user", id: "edit_user.id" } do |f| %>
 
       <div class="field">
         <%= f.label :first_name, "Ton prénom" ,class: "col-md-4 control-label"%>
@@ -29,3 +29,4 @@
       <%= link_to "Retour au profil", user_path(@user) %>
   <% end %>
 </div>
+

@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+  before_action :authenticate_user, only: [:new, :create]
+
   def index
     @events = Event.all
   end
@@ -55,6 +57,13 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
+  end
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Tu dois te connecter pour faire ça."
+      redirect_to new_user_session_path
+    end
   end
 
 end
