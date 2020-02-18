@@ -1,42 +1,34 @@
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Créer ou trouver un événement ?</h1>
-      <p>Ce site est fait pour toi ! Crée des évévements dans ta ville ou trouve des trucs trop cool à faire !</p>
-      <div class="btn btn-outline-info" role="button" aria-pressed="true" style="width:200px;"> <%= link_to "Créer un event", new_event_path %></div>
-    </div>
+<div class="jumbotron">
+  <div class="container">
+    <h1 class="display-3">Créer ou trouver un événement ?</h1>
+    <p>Ce site est fait pour toi ! Crée des évévements dans ta ville ou trouve des trucs trop cool à faire !</p>
+    <div class="btn btn-outline-info" role="button" aria-pressed="true" style="width:200px;"> <%= link_to "Créer un event", new_event_path %></div>
   </div>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Titre</th>
-      <th scope="col">Auteur</th>
-      <th scope="col">Commentaires</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <th scope="row"><%= event.id %></th>
-        <td><%= link_to event.title, event_path(event.id) %></td>
-        <td><%= link_to event.user.first_name, user_path(event.user.id)%></td>
-        <td><%= event.comments.count %> commentaires</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+</div>
 
 <div class="container">
-
-  <div class="row">
-    <% @events.each do |event| %>
-      <div class="col-md-4">
-        <h2><%= event.title%></h2>
-        <p><%= event.description%></p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+  <div class="album ">
+    <div class="container"></div>
+      <div class="row">
+        <% @events.each do |event| %>
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="100%" height="100%" fill="#b7d8d7"/></svg>
+              <div class="card-body">
+                <h2 class="card-text"><%= event.title %></h2>
+                <p class="card-text"><%= event.description %></p>
+                <em class="card-text">Créé par <%= event.admin.first_name %> <%= event.admin.last_name %></em>
+                  <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary"><%= link_to "Voir", event_path(event.id)%></button>
+                    </div>
+                    <small class="text-muted"><td><%= event.attendances.count %> inscrits</td></small>
+                  </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-
-  </div>
+</div>

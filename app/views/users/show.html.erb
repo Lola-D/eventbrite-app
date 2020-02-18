@@ -1,10 +1,11 @@
-<div class="jumbotron p-3 p-md-5 text-white rounded bg-secondary">
-  <div class="col-md-6 px-0">
-    <div class="card-header display-4 font-italic"><%= current_user.first_name %> <%= current_user.last_name %></div>
-    <p class="card-text">Sa description : <%= current_user.description %></p>
-    <p class="card-text">Son email : <%= current_user.email %></p>
-
-        <div class="btn btn-info btn-lg mt-3 mb-3 mr-3" role="button" aria-pressed="true" style="width:200px;"> <%= link_to "Editer", edit_user_registration_path(current_user) %></div>
-
+<div class="card ml-5 mr-5 p-5 mt-5">
+  <div class="card-header display-4 mt-4-auto mb-3">Ton profil</div>
+    <div class="card-body">
+      <h5 class="card-title"><%= current_user.first_name %> <%= current_user.last_name %></h5>
+      <p class="card-title"><%= current_user.description %></p>
+      <em class="card-title"><%= current_user.email %></em></br>
+      <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "Editer", edit_user_path(current_user) %></div>
+      <div class="btn btn-outline-secondary mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "Tes informations de connexion", edit_user_registration_path(current_user) %></div>
+    </div>
   </div>
 </div>
