@@ -28,6 +28,8 @@ body, .jumbotron{
   color: #fff;
 }
 
-.card-text, .card, .card-header {
+.card-text, .card, .card-header, .card-title {
   color: #4c4c4c;
 }
+
+bd-placeholder-img

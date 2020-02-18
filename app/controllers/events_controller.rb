@@ -5,6 +5,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.find(params['id'])
   end
 
   def new
@@ -12,7 +13,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.create(start_date: params['start_date'], duration: params[:duration], title: params['title'], description: params['description'], price: params['price'], location: params[:location], admin_id: current_user.id)
+    @event = Event.create!(start_date: params['start_date'], 
+                          duration: params['duration'], 
+                          title: params['title'], 
+                          description: params['description'], 
+                          price: params['price'], 
+                          location: params['location'], 
+                          admin_id: current_user.id)
     if @event.save
       redirect_to "/"
       flash[:success] = "L'événement a bien été créé !"
@@ -23,12 +30,33 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event = Event.find(params['id'])
   end
 
   def update
+    @event = Event.find(params['id'])
+    if @event.update(start_date: params['start_date'], 
+                     duration: params[:duration], title: params['title'], 
+                     description: params['description'], price: params['price'], 
+                     location: params[:location], 
+                     admin_id: current_user.id)
+      redirect_to event_path(@event.id)
+      flash[:success] = "Le event a bien été édité !"
+    else
+      redirect_to edit_event_path(@event.id)
+      flash[:danger] = "Le event n'a pas été édité !"
+    end
   end
 
   def destroy
+    @event = Event.find(params['id'])
+    if @event.destroy
+      redirect_to "/"
+      flash[:success] = "Le event a bien été supprimé !"
+    else
+      render event_path(@event.id)
+      flash[:danger] = "Le event n'a pas été supprimé !"
+    end
   end
 
 end

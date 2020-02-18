@@ -1,0 +1,45 @@
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Edition de l'événement</h1>
+    </div>
+  </div>
+
+<div class="card ml-5 mr-5 p-5 mt-5">
+  <%= form_for(@event, as: :event, url: event_path(@event), method: :patch, html: { class: "edit_event", id: "edit_event.id" }) do |f|  %>
+
+      <div class="field">
+        <%= f.label :title, "Comment s'appelle ton événement" ,class: "col-md-4 control-label"%><small class="text-muted">(entre 5 et 140 caractères)</small>
+        <%= f.text_field :title, class:"col-md-6 form-control mb-4" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :description, "Ça parle de quoi ?", class: "col-md-4 control-label" %><small class="text-muted">(entre 20 et 1000 caractères)</small>
+        <%= f.text_area :description, class:"col-md-6 form-control mb-4" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :location, "Ça se passe où ?", class: "col-md-4 control-label" %>
+        <%= f.text_field :location, class:"col-md-6 form-control mb-4" %>
+      </div>
+
+        <div class="field">
+          <%= f.label :start_date, "Ça commence quand ?", class: "col-md-3 control-label" %>
+          <%= f.datetime_field :start_date, class:"col-md-6 form-control mb-4"  %>
+
+        </div>
+
+        <div class="field">
+          <%= f.label :duration, "Ça dure combien de temps ?", class: "col-md-5 control-label" %><small class="text-muted">(en minutes)</small>
+          <%= f.text_field :duration, class:"col-md-6 form-control mb-4"  %>
+        </div>
+
+        <div class="field">
+          <%= f.label :price, "Ça coûte combien ?", class: "col-md-5 control-label" %>
+          <%= f.text_field :price, class:"col-md-6 form-control mb-4"%>
+        </div>
+
+      <div class="actions">
+        <%= f.submit "Editer", class:"btn btn-primary mb-4" %>
+      </div>
+  <% end %>
+</div>
