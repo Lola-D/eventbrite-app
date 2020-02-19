@@ -12,10 +12,11 @@
           <p class="card-title">Evénement créé par <strong><%=link_to @event.admin.first_name + " " + @event.admin.last_name, user_path(@event.admin.id)%></p></strong>
           <em class="text-muted mb-3">Il y a <%= @attendances.count %> personne(s) inscrite(s)</em>
         </div>
-        <div class="col-6  ml-5 text-center">
+        <div class="col-6  ml-5 mt-5 text-center">
           <% if is_admin %>
             <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "Editer", edit_event_path(@event.id) %></div>
             <div class="btn btn-outline-danger mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Supprimer', event_path(@event.id), method: :delete, data: { confirm: 'Es-tu sûr ?' } %></div>
+          
           <% elsif user_signed_in? %>
             <%= form_tag attendances_path do %>
               <article>
@@ -29,20 +30,20 @@
                   <strong><%= @event.price %> €</strong>
                 </label>
               </article>
-
               <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                       data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                       data-description="Inscription"
                       data-currency="eur"
                       data-locale="auto"></script>
-            <% end %>
+             <% end %>
+           
            <% else %>
             <div class="col-8 ml-5 mt-5 text-center">Pour participer à cet évévement, tu dois te <%= link_to "connecter", new_user_session_path %> ou <%= link_to "créer un compte", new_user_registration_path%>.</div>
           <% end %>
         </div>
         </div>
 
-
+    <% if is_admin %>
       <% if @attendances.count != 0 %>
         <hr>
         <div class="card-header display-4 mt-4-auto mb-3 d-flex justify-content-between">Liste des personnes inscrites</div>
@@ -56,6 +57,7 @@
           <% end %>
         </div>
       </div>
+    <% end %>
     <% end %>
     </div>
   </div>
