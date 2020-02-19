@@ -10,12 +10,13 @@
           <p class="card-title">Termine le <strong><%= @event.end_date.to_formatted_s(:long) %></p></strong>
           <p class="card-title">Ça se passe au <strong><%= @event.location %></p></strong>
           <p class="card-title">Evénement créé par <strong><%=link_to @event.admin.first_name + " " + @event.admin.last_name, user_path(@event.admin.id)%></p></strong>
+          <em class="text-muted mb-3">Il y a <%= @attendances.count %> personne(s) inscrite(s)</em>
         </div>
         <div class="col-6  ml-5 text-center">
           <% if is_admin %>
             <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "Editer", edit_event_path(@event.id) %></div>
             <div class="btn btn-outline-danger mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Supprimer', event_path(@event.id), method: :delete, data: { confirm: 'Es-tu sûr ?' } %></div>
-          <% elsif current_user == %>
+          <% elsif user_signed_in? %>
             <%= form_tag attendances_path do %>
               <article>
                 <% if flash[:error].present? %>
@@ -44,7 +45,7 @@
 
       <% if @attendances.count != 0 %>
         <hr>
-        <div class="text-muted mb-3"><%= @attendances.count %> personne(s) inscrite(s)</div>
+        <div class="card-header display-4 mt-4-auto mb-3 d-flex justify-content-between">Liste des personnes inscrites</div>
         <div class="row mt-3 ml-3">
           <% @attendances.each do |attendance| %>
             <div class="col-lg-4">
