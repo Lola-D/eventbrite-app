@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  before_action :authenticate_user, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create]
 
   def index
     @events = Event.all
@@ -8,6 +8,8 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params['id'])
+    @attedance = Attendance.new
+    @attendances = @event.attendances
   end
 
   def new
@@ -42,9 +44,10 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @user = current_user
     @event = Event.find(params['id'])
     if @event.destroy
-      redirect_to "/"
+      redirect_to user_path(@user.id)
       flash[:success] = "L'événement a bien été supprimé !"
     else
       render event_path(@event.id)
@@ -57,13 +60,6 @@ class EventsController < ApplicationController
 
   def event_params
     params.require(:event).permit(:start_date, :duration, :title, :description, :price, :location)
-  end
-
-  def authenticate_user
-    unless current_user
-      flash[:danger] = "Tu dois te connecter pour faire ça."
-      redirect_to new_user_session_path
-    end
   end
 
 end

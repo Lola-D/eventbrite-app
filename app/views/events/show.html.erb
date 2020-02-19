@@ -1,14 +1,60 @@
-<div class="card ml-5 mr-5 p-5 mt-5">
-  <div class="card-header display-4 mt-4-auto mb-3 d-flex justify-content-between"><%= @event.title%> <small class="text-muted"><%= @event.attendances.count %> inscrits</small></div>
-    <div class="card-body">
-      <h5 class="card-title mb-4"><%= @event.description %></h5>
-      <p class="card-title">Prévu pour le <strong><%= @event.start_date.to_formatted_s(:long) %></p></strong>
-      <p class="card-title">Termine le <strong><%= @event.end_date.to_formatted_s(:long) %></p></strong>
-      <p class="card-title">Ça se passe au <strong><%= @event.location %></p></strong>
-      <p class="card-title">Ça coûte <strong><%= @event.price %> €</p></strong>
-      <p class="card-title">Evénement créé par <strong><%=link_to @event.admin.first_name + " " + @event.admin.last_name, user_path(@event.admin.id) %></p></strong>
-      <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "S'inscrire" %></div>
+
+  <div class="card ml-5 mr-5 p-5 mt-5">
+    <div class="card-header display-4 mt-4-auto mb-3 d-flex justify-content-between"><%= @event.title%></div>
+      <div class="card-body">
+
+      <div class="row ml-5">
+        <div class="col-5 p-2">
+          <h5 class="card-title mb-4"><%= @event.description %></h5>
+          <p class="card-title">Prévu pour le <strong><%= @event.start_date.to_formatted_s(:long) %></p></strong>
+          <p class="card-title">Termine le <strong><%= @event.end_date.to_formatted_s(:long) %></p></strong>
+          <p class="card-title">Ça se passe au <strong><%= @event.location %></p></strong>
+          <p class="card-title">Evénement créé par <strong><%=link_to @event.admin.first_name + " " + @event.admin.last_name, user_path(@event.admin.id)%></p></strong>
+        </div>
+        <div class="col-6  ml-5 text-center">
+          <% if is_admin %>
+            <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "Editer", edit_event_path(@event.id) %></div>
+            <div class="btn btn-outline-danger mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Supprimer', event_path(@event.id), method: :delete, data: { confirm: 'Es-tu sûr ?' } %></div>
+          <% elsif current_user == %>
+            <%= form_tag attendances_path do %>
+              <article>
+                <% if flash[:error].present? %>
+                  <div id="error_explanation">
+                    <p><%= flash[:error] %></p>
+                  </div>
+                <% end %>
+                <label class="amount">
+                <p>Pour rejoindre cet évévement, merci de payer :</p>
+                  <strong><%= @event.price %> €</strong>
+                </label>
+              </article>
+
+              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-description="Inscription"
+                      data-currency="eur"
+                      data-locale="auto"></script>
+            <% end %>
+           <% else %>
+            <div class="col-8 ml-5 mt-5 text-center">Pour participer à cet évévement, tu dois te <%= link_to "connecter", new_user_session_path %> ou <%= link_to "créer un compte", new_user_registration_path%>.</div>
+          <% end %>
+        </div>
+        </div>
+
+
+      <% if@event.attendances.count != 0 %>
+        <hr>
+        <div class="text-muted mb-3"><%= @event.attendances.count %> personne(s) inscrite(s)</div>
+        <div class="row mt-3 ml-3">
+          <% @attendances.each do |attendance| %>
+            <div class="col-lg-4">
+              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+              <h2><%= attendance.participant.first_name%> <%= attendance.participant.last_name%></h2>
+              <p><%= link_to attendance.participant.email, "mailto:"+attendance.participant.email %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     </div>
   </div>
-</div>
-

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update]
 
   def show
     @events = Event.find_by(params['admin_id'])
@@ -26,13 +26,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :description)
-  end
-
-  def authenticate_user
-    unless current_user
-      flash[:danger] = "Tu dois te connecter pour faire ça."
-      redirect_to new_user_session_path
-    end
   end
 
 end
