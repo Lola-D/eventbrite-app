@@ -42,9 +42,9 @@
         </div>
 
 
-      <% if@event.attendances.count != 0 %>
+      <% if @attendances.count != 0 %>
         <hr>
-        <div class="text-muted mb-3"><%= @event.attendances.count %> personne(s) inscrite(s)</div>
+        <div class="text-muted mb-3"><%= @attendances.count %> personne(s) inscrite(s)</div>
         <div class="row mt-3 ml-3">
           <% @attendances.each do |attendance| %>
             <div class="col-lg-4">
