@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   validates :description, presence: true, length: { in: 20..1000 }
   validates :start_date, presence: true
   validates :duration, presence: true, numericality: { only_integer: true, greater_than: 0}
-  validates :price, presence: true, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 1000 }
+  validates :price, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 1000 }
   validates :location, presence: true
 
   belongs_to :admin, class_name: 'User'
@@ -14,7 +14,7 @@ class Event < ApplicationRecord
   has_many :participants, through: :attendances
 
   def end_date
-    self.start_date + self.duration * 60
+    start_date + duration.minutes
   end
 
   def is_in_the_future?
@@ -25,7 +25,7 @@ class Event < ApplicationRecord
 
   def is_multiple_of_5?
     if duration.present? && duration % 5 != 0 && duration > 0
-      errors.add(:duration, "has to be a multiple of 5")
+      errors.add(:duration, "must be a multiple of 5")
     end
   end
   

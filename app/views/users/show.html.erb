@@ -4,7 +4,7 @@
       <div class="card-body">
         <h5 class="card-title"><%= @user.description %></h5>
         <em class="card-title"><%= @user.email %></em></br>
-        <% if current_user_profil %>
+        <% if is_admin %>
            <div class="btn btn-outline-primary mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "Créer un évévement", new_event_path %></div>
           <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "Modifier ton profil", edit_user_path(@user) %></div>
           <div class="btn btn-outline-secondary mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "Tes informations de connexion", edit_user_registration_path(@user) %></div>

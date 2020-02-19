@@ -18,25 +18,28 @@
             <div class="btn btn-outline-danger mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Supprimer', event_path(@event.id), method: :delete, data: { confirm: 'Es-tu sûr ?' } %></div>
           
           <% elsif user_signed_in? %>
-            <%= form_tag attendances_path do %>
-              <article>
-                <% if flash[:error].present? %>
-                  <div id="error_explanation">
-                    <p><%= flash[:error] %></p>
-                  </div>
+            <% if @event.price == 0 %>
+              <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" ><%= link_to "Inscris toi !", event_sub_path(@event.id) %></div>
+            <% else %>
+              <%= form_tag event_sub_path(@event.id) do %>
+                <article>
+                  <% if flash[:error].present? %>
+                    <div id="error_explanation">
+                      <p><%= flash[:error] %></p>
+                    </div>
+                  <% end %>
+                  <label class="amount">
+                  <p>Pour rejoindre cet évévement, merci de payer :</p>
+                    <strong><%= @event.price %> €</strong>
+                  </label>
+                </article>
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                        data-description="Inscription"
+                        data-currency="eur"
+                        data-locale="auto"></script>
                 <% end %>
-                <label class="amount">
-                <p>Pour rejoindre cet évévement, merci de payer :</p>
-                  <strong><%= @event.price %> €</strong>
-                </label>
-              </article>
-              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                      data-description="Inscription"
-                      data-currency="eur"
-                      data-locale="auto"></script>
-             <% end %>
-           
+              <% end %>
            <% else %>
             <div class="col-8 ml-5 mt-5 text-center">Pour participer à cet évévement, tu dois te <%= link_to "connecter", new_user_session_path %> ou <%= link_to "créer un compte", new_user_registration_path%>.</div>
           <% end %>
