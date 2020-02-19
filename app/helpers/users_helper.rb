@@ -1,7 +1,11 @@
 module UsersHelper
 
   def is_admin
-    current_user.id.to_i == params[:id].to_i
+    @event = Event.find(params['id'])
+    !current_user.nil? && current_user.id == @event.admin_id
   end
 
+  def current_user_profil
+    current_user.id.to_i == params[:id].to_i
+  end
 end

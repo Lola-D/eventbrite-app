@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :organized_events, foreign_key: 'admin_id', class_name: 'Event'
   has_many :attendances, foreign_key: 'participant_id'
-  
+
   after_create :welcome_send
 
   def welcome_send
