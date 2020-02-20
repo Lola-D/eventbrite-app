@@ -7,6 +7,7 @@ class AttendancesController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
+    @amount = @event.price * 100
     @attendance = Attendance.create(event_id: @event.id, participant_id: current_user.id, stripe_customer_id: current_user.id)
 
     customer = Stripe::Customer.create({
