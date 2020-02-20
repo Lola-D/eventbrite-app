@@ -18,8 +18,6 @@
             <div class="col-8 ml-5 mt-5 text-center">Tu participes déjà à cet événement ! Tu peux le suivre sur ton profil ou découvrir les autres !</div>
             <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "Liste des events", events_path %></div>
             <div class="btn btn-outline-primary mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Mon profil', user_path(current_user) %></div>
-         
-
           <% elsif user_signed_in? %>
             <div class="col-6 btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "Inscris toi ici", new_event_attendance_path(@event.id) %></div>
           <% else %>

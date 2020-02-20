@@ -22,13 +22,14 @@ end
                location: Faker::Address.street_address, 
                admin: User.all.sample)
 end
+
 5.times do
   Event.create(start_date: Faker::Time.forward(days: 60, format: :long), 
-  duration: 120, title: Faker::Marketing.unique.buzzwords, 
-  description: Faker::Lorem.paragraph(sentence_count: 5), 
-  price: 0, 
-  location: Faker::Address.street_address, 
-  admin: User.all.sample)
+               duration: 120, title: Faker::Marketing.unique.buzzwords, 
+               description: Faker::Lorem.paragraph(sentence_count: 5), 
+               price: 0, 
+               location: Faker::Address.street_address, 
+               admin: User.all.sample)
 end
 
 15.times do

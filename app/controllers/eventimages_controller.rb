@@ -1,0 +1,2 @@
+class EventimagesController < ApplicationController
+end

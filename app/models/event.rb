@@ -12,6 +12,7 @@ class Event < ApplicationRecord
   belongs_to :admin, class_name: 'User'
   has_many :attendances
   has_many :participants, through: :attendances
+  has_one_attached :eventimage
 
   def end_date
     start_date + duration.minutes

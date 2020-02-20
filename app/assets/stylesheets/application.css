@@ -18,7 +18,7 @@
   color: #4c4c4c;
 }
 
-body, .jumbotron {
+body {
   background-color: #b7c9d8;
 }
 .navbar {
@@ -28,9 +28,4 @@ body, .jumbotron {
 .card, .card-header {
   background-color: #eaeff4;
 }
-
-.jumbotron {
-  color: #fff;
-}
-
 
