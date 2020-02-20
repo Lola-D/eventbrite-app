@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
-  before_action :authenticate_user!, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:show]
 
   def show
-    @events = Event.find_by(params['admin_id'])
-    @user = User.find(params['id'])
+    @events = Event.where(admin: current_user)
+    @participations = Attendance.where(participant: current_user)
   end
 
 end

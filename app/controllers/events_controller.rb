@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
 
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :show]
 
   def index
-    @events = Event.all
+    @events = Event.order(:start_date).all
   end
 
   def show

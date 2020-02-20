@@ -10,10 +10,7 @@ module UsersHelper
   end
 
   def already_participant
-    # @event = Event.find(params[:id])
-    # @attendances = Attendance.where(event_id: params[@event.id]).all
-    # @attendances.each do |attendance|
-    #   current_user.id == @attendances.participant_id
-    # end
+    # @events = Event.where(admin: current_user)
+    # @participations = Attendance.where(participant: current_user)
   end
 end
