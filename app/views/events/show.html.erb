@@ -14,17 +14,21 @@
           <% if is_admin %>
             <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "Editer", edit_event_path(@event.id) %></div>
             <div class="btn btn-outline-danger mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Supprimer', event_path(@event.id), method: :delete, data: { confirm: 'Es-tu sûr ?' } %></div>
+          <% elsif already_participant %>
+            <div class="col-8 ml-5 mt-5 text-center">Tu participes déjà à cet événement ! Tu peux le suivre sur ton profil ou découvrir les autres !</div>
+            <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "Liste des events", events_path %></div>
+            <div class="btn btn-outline-primary mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Mon profil', user_path(current_user) %></div>
           <% elsif user_signed_in? %>
-            <div class="col-6 btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "s'inscrire", new_event_attendance_path(@event.id) %></div>
+            <div class="col-6 btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "Inscris toi ici", new_event_attendance_path(@event.id) %></div>
           <% else %>
             <div class="col-8 ml-5 mt-5 text-center">Pour participer à cet évévement, tu dois te <%= link_to "connecter", new_user_session_path %> ou <%= link_to "créer un compte", new_user_registration_path%>.</div>
           <% end %>
         </div>
       </div>
     <% if is_admin %>
-      <% if @attendances.count != 0 %>
-        <hr>
+      <hr>
         <div class="card-header display-4 mt-4-auto mb-3 d-flex justify-content-between">Liste des personnes inscrites</div>
+        <% if @attendances.count != 0 %>
         <div class="row mt-3 ml-3">
           <% @attendances.each do |attendance| %>
             <div class="col-lg-4">
@@ -34,7 +38,7 @@
             </div>
           <% end %>
         </div>
-      <% end %>
+        <% end %>
     <% end %>
   </div>
 </div>

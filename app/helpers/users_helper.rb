@@ -8,4 +8,12 @@ module UsersHelper
   def current_user_profil
     current_user.id.to_i == params[:id].to_i
   end
+
+  def already_participant
+    # @event = Event.find(params[:id])
+    # @attendances = Attendance.where(event_id: params[@event.id]).all
+    # @attendances.each do |attendance|
+    #   current_user.id == @attendances.participant_id
+    # end
+  end
 end
