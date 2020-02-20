@@ -1,13 +1,18 @@
-<div class="container">
+<div class="card ml-5 mr-5 p-5 mt-5">
+  <div class="card-header display-4 mt-4-auto mb-3 d-flex justify-content-between">Inscription</div>
+  <div class="card-body">
     <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <h2 class="h3 mb-3 font-weight-normal text-center" id="Publier">S'inscrire à l'évènement</h2><br>
-        <h3>Votre inscription sera validée dès que le paiement sera effectué !</h3><br>
-        <h4><u>Détails de l'évènement :</u></h4>
-        <p style="font-size: 14px;">Titre : <%= @event.title.capitalize %></p>
-        <p style="font-size: 14px;">Date : <%= @event.end_date.strftime("le %d/%m/%Y à %I:%M") %></p>
-        <p style="font-size: 14px;"><%= link_to "Tous les détails", event_path(@event.id)%></p>
-        <%= form_tag url_for(action: 'create'), method: "post" do %>
+      <div class="col-6">
+          <h5 class="card-title mb-4">L'inscription sera validée dès que le paiement sera effectué !</h5>
+          <p class="card-title">Récapitulatif de l'événement :</p>
+          <p class="card-title">Titre : <%= @event.title.capitalize %></p>
+          <p class="card-title">Adresse : <%= @event.location %></p>
+          <p class="card-title">Débute le : <%= @event.start_date.strftime("%d/%m/%Y à %I:%M") %></p>
+          <p class="card-title"></p>
+          <em class="text-muted mb-3"></em>
+      </div>
+      <div class="col-3 offset-2 text-center pt-5">
+          <%= form_tag url_for(action: 'create'), method: "post" do %>
           <article>
             <% if flash[:error].present? %>
               <div id="error_explanation">
@@ -15,7 +20,8 @@
               </div>
             <% end %>
             <label class="amount">
-              <span style="font-size: 14px;">Prix: <%= @event.price %>€</span>
+              <p>Finaliser le paiement</p>
+              <p>de <strong><%= @event.price %> €</strong></p>
             </label>
           </article>
           <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -27,4 +33,5 @@
         <% end %>
       </div>
     </div>
-  </div> 
+  </div>
+</div>
