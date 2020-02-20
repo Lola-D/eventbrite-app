@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 offset-md-3">
+			<h2 class="h3 mb-3 font-weight-normal text-center" id="Publier">Le paiement a bien été effectué !</h2><br>
+			<h3>Votre inscription est validée, votre référence de réservation est : #<%= @attendance.id %>.</h3><br>
+			<h4>Vous pouvez retrouver les détails de votre réservation dans <%= link_to "votre profil", user_path(current_user.id) %></u></h4><br>
+
+			<h3>A bientôt !</h3>
+			<br><br> <a class="btn btn-primary btn-lg"<%= link_to "<< Retour à la liste des évènements", root_path  %></a>
+		</div>
+	</div>
+</div>

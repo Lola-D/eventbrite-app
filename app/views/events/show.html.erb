@@ -19,7 +19,8 @@
           
           <% elsif user_signed_in? %>
 
-            <%= render 'charges/form'%>
+             <div class="col-6 btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "s'inscrire", new_event_attendance_path(@event.id) %></div>
+
 
            <% else %>
             <div class="col-8 ml-5 mt-5 text-center">Pour participer à cet évévement, tu dois te <%= link_to "connecter", new_user_session_path %> ou <%= link_to "créer un compte", new_user_registration_path%>.</div>

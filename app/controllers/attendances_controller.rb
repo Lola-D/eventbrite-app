@@ -2,26 +2,29 @@ class AttendancesController < ApplicationController
 
   def new
     @attendance = Attendance.new
-    @event = Event.find(params['id'])
+    @event = Event.find(params[:event_id])
   end
 
   def create
-    @event = Event.find(params['event_id'])
-    @attendance = Attendance.create(attendance_params)
+    @event = Event.find(params[:event_id])
+    @attendance = Attendance.create(event_id: @event.id, participant_id: current_user.id, stripe_customer_id: current_user.id)
 
-    if @attendance.save
-      flash[:success] = "Le paiement à bien été effectué !"
-      redirect_to event_path(@event.id)
-    else
-      flash[:danger] = "Le paiement n'a pas été effectué"
-      redirect_to attendances_path
-    end
-  end
+    customer = Stripe::Customer.create({
+      email: params[:stripeEmail],
+      source: params[:stripeToken],
+    })
 
-  private
+    charge = Stripe::Charge.create({
+      customer: customer.id,
+      amount: @amount,
+      description: 'Paiement évènement',
+      currency: 'eur',
+    })
 
-  def attendance_params
-    params.require(:attendance).permit(:event_id, :user_id)
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to new_event_attendance(@event.id)
+
   end
 
 end
