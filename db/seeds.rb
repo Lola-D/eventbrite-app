@@ -5,7 +5,7 @@ User.reset_pk_sequence
 Event.reset_pk_sequence
 Attendance.reset_pk_sequence
 
-20.times do
+10.times do
   User.create(first_name: Faker::Name.first_name, 
               last_name: Faker::Name.last_name, 
               description: Faker::Lorem.paragraph(sentence_count: 4), 
@@ -14,7 +14,7 @@ Attendance.reset_pk_sequence
               password_confirmation: "123456")
 end
 
-12.times do
+5.times do
   Event.create(start_date: Faker::Time.forward(days: 60, format: :long), 
                duration: 120, title: Faker::Marketing.unique.buzzwords, 
                description: Faker::Lorem.paragraph(sentence_count: 5), 
@@ -23,7 +23,7 @@ end
                admin: User.all.sample)
 end
 
-50.times do
+15.times do
   Attendance.create(stripe_customer_id: User.all.sample, 
                     event: Event.all.sample, 
                     participant: User.all.sample)
