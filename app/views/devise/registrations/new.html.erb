@@ -1,7 +1,7 @@
 <div class="card ml-5 mr-5 p-5 mt-5">
   <div class="card-header display-4 mt-4-auto mb-3">S'inscrire</div>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), multipart: true) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     
      <div class="field">
