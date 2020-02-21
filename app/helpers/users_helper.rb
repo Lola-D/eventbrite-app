@@ -10,8 +10,7 @@ module UsersHelper
   end
 
   def already_participant
-    # @events = Event.where(admin: current_user)
-    # @participations = Attendance.where(participant: current_user)
+    Attendance.find_by(event_id: @event.id, participant_id: current_user.id)
   end  
 
 end

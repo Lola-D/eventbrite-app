@@ -8,12 +8,16 @@
 
 <div class="container">
   <div class="album ">
-    <div class="container"></div>
+    <div class="container">
       <div class="row">
         <% @events.each do |event| %>
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="100%" height="100%" fill="#b7d8d7"/></svg>
+              <% if event.eventimage.attached? %>
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225"><%= image_tag event.eventimage %></img>
+              <% else %>
+                <img class="bd-placeholder-img card-img-top" width="100%" height="225"></img>
+              <% end %>
               <div class="card-body">
                 <h2 class="card-text"><%= event.title.capitalize %></h2>
                 <p class="card-text"><%= event.description %></p>

@@ -5,7 +5,12 @@
   </div>
 
 <div class="card ml-5 mr-5 p-5 mt-5">
-  <%= form_for(@event, as: :event, url: event_path(@event), method: :patch, html: { class: "edit_event", id: "edit_event.id" }) do |f|  %>
+  <%= form_for(@event, as: :event, url: event_path(@event), method: :patch, html: { class: "edit_event", id: "edit_event.id" }, multipart: true) do |f|  %>
+
+      <div class="field">
+        <%= f.label :eventimage, "Choisis une image" ,class: "col-md-4 control-label"%>
+        <%= f.file_field :eventimage, class:"col-md-6 form-control mb-4", required: true %>
+      </div>
 
       <div class="field">
         <%= f.label :title, "Comment s'appelle ton événement" ,class: "col-md-4 control-label"%><small class="text-muted">(entre 5 et 140 caractères)</small>

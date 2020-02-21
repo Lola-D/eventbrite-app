@@ -19,6 +19,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.create(event_params)
     @event.admin = current_user
+    @event.eventimage.attach(params[:eventimage])
     if @event.save
       redirect_to "/"
       flash[:success] = "L'événement a bien été créé !"

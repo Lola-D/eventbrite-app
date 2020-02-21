@@ -36,7 +36,7 @@
         <h4 class="font-italic">Tes participations</h4> 
           <ol class="list-unstyled mb-0">
             <% @participations.all.each do |participation| %>
-              <li class="card-text mt-3"><%= link_to participation.event.title.capitalize %> le <%= participation.event.start_date.strftime("%d/%m/%Y") %></li>
+              <li class="card-text mt-3"><%= link_to participation.event.title.capitalize, event_path(participation.event.id) %> le <%= participation.event.start_date.strftime("%d/%m/%Y") %></li>
             <% end %>
           </ol>
       </aside>
