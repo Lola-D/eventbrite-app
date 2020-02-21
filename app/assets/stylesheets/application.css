@@ -18,10 +18,7 @@
   color: #4c4c4c;
   font-family: 'Raleway';
 }
-body, html {
-  height:100%;
-  margin: 0 auto;
-}
+
 
 .navbar {
   background-color: #F9F595;
