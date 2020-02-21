@@ -16,9 +16,32 @@
 
  * {
   color: #4c4c4c;
+  font-family: 'Raleway';
+}
+
+body {
+  margin-top: 4%;
+  margin-bottom:6%;
 }
 
 .navbar {
   background-color: #F9F595;
 }
 
+.navbar-brand {
+  font-family: 'Pacifico';
+  font-size: 1.5em !important;
+  color: #4c4c4c;
+}
+
+.nav-link {
+  color: #4c4c4c;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+  color: #727272;
+}
+
+footer {
+  background-color: #F9F595;
+}
