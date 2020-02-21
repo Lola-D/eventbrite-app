@@ -1,36 +1,41 @@
+<div class="masthead pt-5 mb-5">
+  <div class="container">
+    <h1 class="display-3 masthead-text mt-5"><%= @event.title.capitalize%><h1>
+  </div>
+</div>
+
 <div class="card ml-5 mr-5 p-5 mt-5">
-  <div class="card-header display-4 mt-4-auto mb-3 d-flex justify-content-between"><%= @event.title.capitalize%></div>
-    <div class="card-body">
-      <div class="row ml-5">
-        <div class="col-5 p-2">
-          <h5 class="card-title mb-4"><%= @event.description %></h5>
-          <p class="card-title">Prévu pour le <strong><%= @event.start_date.strftime("%d/%m/%Y à %I:%M") %></p></strong>
-          <p class="card-title">Termine le <strong><%= @event.end_date.strftime("%d/%m/%Y à %I:%M") %></p></strong>
-          <p class="card-title">Ça se passe au <strong><%= @event.location %></p></strong>
-          <p class="card-title">Evénement créé par <strong><%=link_to @event.admin.first_name + " " + @event.admin.last_name, user_path(@event.admin.id)%></p></strong>
-          <em class="text-muted mb-3">Il y a <%= @attendances.count %> personne(s) inscrite(s)</em>
-        </div>
-        <div class="col-6  ml-5 mt-5 text-center">
-          <% if is_admin %>
-            <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "Editer", edit_event_path(@event.id) %></div>
-            <div class="btn btn-outline-danger mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Supprimer', event_path(@event.id), method: :delete, data: { confirm: 'Es-tu sûr ?' } %></div>
-          <% elsif @event.price == 0 %>
-            <p class="mt-3"><strong>C'est gratuit !</strong></p>
-          <% elsif already_participant %>
-            <div class="col-8 ml-5 mt-5 text-center">Tu participes déjà à cet événement ! Tu peux le suivre sur ton profil ou découvrir les autres !</div>
-            <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "Liste des events", events_path %></div>
-            <div class="btn btn-outline-primary mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Mon profil', user_path(current_user) %></div>
-          <% elsif user_signed_in? %>
-            <div class="col-6 btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"><%= link_to "Inscris toi ici", new_event_attendance_path(@event.id) %></div>
-          <% else %>
-            <div class="col-8 ml-5 mt-5 text-center">Pour participer à cet évévement, tu dois te <%= link_to "connecter", new_user_session_path %> ou <%= link_to "créer un compte", new_user_registration_path%>.</div>
-          <% end %>
-        </div>
+  <div class="card-body">
+    <div class="row ml-5">
+      <div class="col-5 p-2">
+        <h5 class="card-title mb-4"><%= @event.description %></h5>
+        <p class="card-title">Prévu pour le <strong><%= @event.start_date.strftime("%d/%m/%Y à %I:%M") %></p></strong>
+        <p class="card-title">Termine le <strong><%= @event.end_date.strftime("%d/%m/%Y à %I:%M") %></p></strong>
+        <p class="card-title">Ça se passe au <strong><%= @event.location %></p></strong>
+        <p class="card-title">Evénement créé par <strong><%=link_to @event.admin.first_name + " " + @event.admin.last_name, user_path(@event.admin.id)%></p></strong>
+        <em class="text-muted mb-3">Il y a <%= @attendances.count %> personne(s) inscrite(s)</em>
       </div>
+      <div class="col-6  ml-5 mt-5 text-center">
+        <% if is_admin %>
+          <%= link_to "Editer", edit_event_path(@event.id), class:"btn btn-outline-info mt-3 mb-3 mr-3" %>
+          <%= link_to 'Supprimer', event_path(@event.id), method: :delete, data: { confirm: 'Es-tu sûr ?' }, class:"btn btn-outline-danger mt-3 mb-3 mr-3" %>
+        <% elsif @event.price == 0 %>
+          <p class="mt-3"><strong>C'est gratuit !</strong></p>
+        <% elsif already_participant %>
+          <div class="col-8 ml-5 mt-5 text-center">Tu participes déjà à cet événement ! Tu peux le suivre sur ton profil ou découvrir les autres !</div>
+          <div class="btn btn-outline-info mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to "Liste des events", events_path %></div>
+          <div class="btn btn-outline-primary mt-3 mb-3 mr-3" role="button" aria-pressed="true"> <%= link_to 'Mon profil', user_path(current_user) %></div>
+        <% elsif user_signed_in? %>
+          <%= link_to "Inscris toi ici", new_event_attendance_path(@event.id), class:"nav-link col-8 ml-5 mt-5 text-center btn btn-outline-info btn-sub"%>
+        <% else %>
+          <div class="col-8 ml-5 mt-5 text-center">Pour participer à cet évévement, tu dois te <%= link_to "connecter", new_user_session_path %> ou <%= link_to "créer un compte", new_user_registration_path%>.</div>
+        <% end %>
+      </div>
+    </div>
     <% if is_admin %>
       <hr>
-        <div class="card-header display-4 mt-4-auto mb-3 d-flex justify-content-between">Liste des personnes inscrites</div>
-        <% if @attendances.count != 0 %>
+      <div class="card-header display-4 mt-4-auto mb-3 card-header-show">Liste des personnes inscrites</div>
+      <% if @attendances.count != 0 %>
         <div class="row mt-3 ml-3">
           <% @attendances.each do |attendance| %>
             <div class="col-lg-4">
@@ -40,7 +45,7 @@
             </div>
           <% end %>
         </div>
-        <% end %>
+      <% end %>
     <% end %>
   </div>
 </div>

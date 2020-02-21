@@ -1,15 +1,15 @@
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">Crée ton événement</h1>
-    </div>
+<div class="masthead pt-5 mb-5">
+  <div class="container">
+    <h1 class="display-3 masthead-text mt-5">Crée ton événement<h1>
   </div>
+</div>
 
-<div class="card ml-5 mr-5 p-5 mt-5">
+<div class="card m-5 p-5">
   <%= form_for(@event, as: :event, url: events_path(@event), method: :post, html: { class: "new_event"}, multipart: true) do |f|  %>
 
       <div class="field">
         <%= f.label :eventimage, "Choisis une image" ,class: "col-md-4 control-label"%>
-        <%= f.file_field :eventimage, class:"col-md-6 form-control mb-4", required: true %>
+        <%= f.file_field :eventimage, class:"col-md-6 form-control mb-4"%>
       </div>
 
       <div class="field">
@@ -43,7 +43,7 @@
         </div>
 
       <div class="actions">
-        <%= f.submit "Créer", class:"btn btn-primary mb-4" %>
+        <%= f.submit "Création", class:"btn btn-outline-secondary nav-link btn-sub" %>
       </div>
 <% end %>
 </div>

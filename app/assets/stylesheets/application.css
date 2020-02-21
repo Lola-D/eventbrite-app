@@ -18,10 +18,9 @@
   color: #4c4c4c;
   font-family: 'Raleway';
 }
-
-body {
-  margin-top: 4%;
-  margin-bottom:6%;
+body, html {
+  height:100%;
+  margin: 0 auto;
 }
 
 .navbar {
@@ -40,8 +39,4 @@ body {
 
 .navbar-brand:hover, .nav-link:hover {
   color: #727272;
-}
-
-footer {
-  background-color: #F9F595;
 }
