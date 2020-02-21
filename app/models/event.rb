@@ -8,7 +8,6 @@ class Event < ApplicationRecord
   validates :duration, presence: true, numericality: { only_integer: true, greater_than: 0}
   validates :price, presence: true, numericality: { only_integer: true, less_than_or_equal_to: 1000 }
   validates :location, presence: true
-  validates :eventimage, presence: true
 
   belongs_to :admin, class_name: 'User'
   has_many :attendances

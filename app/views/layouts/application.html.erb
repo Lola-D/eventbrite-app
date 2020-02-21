@@ -6,10 +6,10 @@
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/7fbc2f72d3.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <header>
     
       <nav class="navbar navbar-expand-lg">
         <div class="navbar-brand"><%= link_to 'Find an Event', root_path, class: 'navbar-brand' %></div>
@@ -32,19 +32,24 @@
           </ul>
       </nav>
 
-    </header>
-
-      <div class="container pt-2">
+      <div class="container">
         <% flash.each do |name, msg| %>
           <div class="alert alert-<%= name %>"><%= msg %></div>
         <% end %>
-        <%= yield %>
       </div>
+
+      <%= yield %>
+     
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
+
+  <footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">Made with <i class="fas fa-heart"></i> by Lola</div>
+  </footer>
+
 </html>
 

@@ -1,6 +1,28 @@
 // Place all the styles related to the events controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.jumbotron {
-  background-color: #b7c9d8;
+.masthead {
+  background: image-url('event.jpg');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top;
+  height: 400px;
+  
+}
+.masthead-text {
+  color: white !important;
+}
+
+.bd-placeholder-img {
+  background: image-url('card.jpg');
+  background-size: 100%;
+}
+
+.card-event {
+  background-color: #F9F595;
+  color: #4c4c4c !important;
+}
+
+.btn-masthead {
+  background-color: #F9F595;
 }
